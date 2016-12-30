@@ -13,3 +13,7 @@ cat /data/derivatives/pagerank/$1-links/part* > $1-links.txt
 mv $1-links.txt /data/derivatives/pagerank
 cat /data/derivatives/pagerank/$1-nodes/part* > $1-nodes.txt
 mv $1-nodes.txt /data/derivatives/pagerank
+
+# jq
+jq -c -n --slurpfile nodes </data/derivatives/pagerank/$1-links.txt --slurpfile links \
+  </data/derivatives/pagerank/$1-nodes.txt '{nodes: $nodes, links: $links}' > $1-graph.json
