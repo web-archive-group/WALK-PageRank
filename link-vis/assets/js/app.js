@@ -17,7 +17,7 @@ var max_links = 1;
 var num_nodes = 1;
 
 var min_year = 2005;
-var max_year = 2009;
+var max_year = 2016;
 
 // setup D3 graph
 var graph = d3.select("#graph")
