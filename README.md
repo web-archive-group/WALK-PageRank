@@ -2,6 +2,8 @@
 
 This repository modifies WALK templates in order to run PageRank on collections. Dynamic PageRank is probably too intensive, so for at least a beginning point we will run 15 iterations per collection.
 
+This is using Warcbase's [Spark Network Analysis](http://lintool.github.io/warcbase-docs/Spark-Network-Analysis/), developed by the amazing team of Alice Ran Zhou (University of Waterloo), Jeremy Wiebe (University of Waterloo), Shane Martin (York University), and Eric Oosenbrug (York University), in part during the [Archives Unleashed hackathon](http://archivesunleashed.ca/). 
+
 ## Visualizing Them
 
 1. Clone the repository
