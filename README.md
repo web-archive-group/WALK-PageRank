@@ -26,6 +26,7 @@ ALBERTA_hcf_alberta_online_encyclopedia-graph
 ALBERTA_health_sciences_grey_literature-graph
 ALBERTA_heritage_community_foundation-graph
 ALBERTA_humanities_computing-graph```
+```
 
 i.e. `./display.sh ALBERTA_alberta_floods_2013-graph`
 
