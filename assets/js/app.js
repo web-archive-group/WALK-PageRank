@@ -296,7 +296,7 @@ function makeThresholdSlider() {
 displayLoader();
 
 // import and process node data, then get link data
-d3.json("/data/graph.json", function (error, data) {
+d3.json("https://web-archive-group.github.io/WALK-PageRank/data/graph.json", function (error, data) {
   if (error) throw error;
 
   // process nodes
