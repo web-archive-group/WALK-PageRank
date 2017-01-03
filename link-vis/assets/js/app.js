@@ -41,6 +41,7 @@ var drag = force.drag()
 var min_zoom = 0.1;
 var max_zoom = 7;
 var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom]);
+//var zoom = d3.zoom();
 
 // D3 tooltips
 var nodetip = d3.tip()
@@ -155,22 +156,28 @@ function updateGraph() {
     .call(drag);
 
   // set node size
+  // one size doesn't always fit all 
+  // in line 168, change the variable to shrink
+  // or grow nodes - i.e. from 2 to 20
   node_enter.append("circle")
     .attr("style", function(d) {
       var random_hue = _.sample(_.range(0, 256));
       return "fill: hsl(" + random_hue + ", 100%, 60%)";
     })
     .attr("r", function(d) {
-      return 1 + d.pageRank * Math.log(d.count) * 20;
+      return 1 + d.pageRank * Math.log(d.count) * 2;
     });
 
   // add node name
+  // one size doesn't always fit all 
+  // in line 180, change the variable to shrink
+  // or grow nodes - i.e. from 1 to 10
   node.append("text")
       .attr("x", 12)
       .attr("dy", ".35em")
       .attr("style", function(d) {
         var styles = [];
-        var font_size = Math.log(d.count) * 5;
+        var font_size = Math.log(d.count) * 1;
         styles.push("font-size:" + font_size + "px");
         styles.push("opacity:" + Math.log(d.count) * 0.1);
         return styles.join(";");
