@@ -32,14 +32,14 @@ var node = graph.selectAll(".node");
 // force-directed layout settings
 var force = d3.layout.force()
     .size([width, height])
-    .friction(0.2);
+    .friction(0.8);
 
 var drag = force.drag()
   .on("dragstart", dragstart);
 
 // graph controls
 var min_zoom = 0.1;
-var max_zoom = 7;
+var max_zoom = 500;
 var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom]);
 //var zoom = d3.zoom();
 
@@ -122,8 +122,8 @@ function updateGraph() {
   // links settings
   force.nodes(d3.values(nodes))
     .links(node_links)
-    .linkStrength(function(l) { return Math.log(l.count) * 0.2; })
-    .charge(function(l) { return Math.log(l.count) * -250; })
+    .linkStrength(function(l) { return Math.log(l.count) * 0.25; })
+    .charge(function(l) { return Math.log(l.count) * -325; })
     .gravity(function(l) { return Math.log(l.count) * 1; })
     .on("tick", tick)
     .start();
@@ -179,7 +179,7 @@ function updateGraph() {
         var styles = [];
         var font_size = Math.log(d.count) * 1;
         styles.push("font-size:" + font_size + "px");
-        styles.push("opacity:" + Math.log(d.count) * 0.1);
+        styles.push("opacity:" + Math.log(d.count) * 0.2);
         return styles.join(";");
       })
       .text(function(d) { return d.name; });
