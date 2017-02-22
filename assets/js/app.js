@@ -17,7 +17,7 @@ var max_links = 1;
 var num_nodes = 1;
 
 var min_year = 2005;
-var max_year = 2016;
+var max_year = 2009;
 
 // setup D3 graph
 var graph = d3.select("#graph")
@@ -32,16 +32,15 @@ var node = graph.selectAll(".node");
 // force-directed layout settings
 var force = d3.layout.force()
     .size([width, height])
-    .friction(0.8);
+    .friction(0.2);
 
 var drag = force.drag()
   .on("dragstart", dragstart);
 
 // graph controls
 var min_zoom = 0.1;
-var max_zoom = 500;
+var max_zoom = 7;
 var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom]);
-//var zoom = d3.zoom();
 
 // D3 tooltips
 var nodetip = d3.tip()
@@ -122,8 +121,8 @@ function updateGraph() {
   // links settings
   force.nodes(d3.values(nodes))
     .links(node_links)
-    .linkStrength(function(l) { return Math.log(l.count) * 0.25; })
-    .charge(function(l) { return Math.log(l.count) * -325; })
+    .linkStrength(function(l) { return Math.log(l.count) * 0.2; })
+    .charge(function(l) { return Math.log(l.count) * -250; })
     .gravity(function(l) { return Math.log(l.count) * 1; })
     .on("tick", tick)
     .start();
@@ -156,30 +155,24 @@ function updateGraph() {
     .call(drag);
 
   // set node size
-  // one size doesn't always fit all 
-  // in line 168, change the variable to shrink
-  // or grow nodes - i.e. from 2 to 20
   node_enter.append("circle")
     .attr("style", function(d) {
       var random_hue = _.sample(_.range(0, 256));
       return "fill: hsl(" + random_hue + ", 100%, 60%)";
     })
     .attr("r", function(d) {
-      return 1 + d.pageRank * Math.log(d.count) * 2;
+      return 1 + d.pageRank * Math.log(d.count) * 20;
     });
 
   // add node name
-  // one size doesn't always fit all 
-  // in line 180, change the variable to shrink
-  // or grow nodes - i.e. from 1 to 10
   node.append("text")
       .attr("x", 12)
       .attr("dy", ".35em")
       .attr("style", function(d) {
         var styles = [];
-        var font_size = Math.log(d.count) * 1;
+        var font_size = Math.log(d.count) * 5;
         styles.push("font-size:" + font_size + "px");
-        styles.push("opacity:" + Math.log(d.count) * 0.2);
+        styles.push("opacity:" + Math.log(d.count) * 0.1);
         return styles.join(";");
       })
       .text(function(d) { return d.name; });
@@ -296,7 +289,7 @@ function makeThresholdSlider() {
 displayLoader();
 
 // import and process node data, then get link data
-d3.json("https://web-archive-group.github.io/WALK-PageRank/data/graph.json", function (error, data) {
+d3.json("/data/graph.json", function (error, data) {
   if (error) throw error;
 
   // process nodes
